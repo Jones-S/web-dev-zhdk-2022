@@ -38,3 +38,18 @@
   min-height: 500px;
   object-fit: cover;
 }
+
+.image-block {
+  position: relative;
+  background-color: yellow;
+}
+
+.move-me {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+
+  position: fixed;
+  bottom: 10px;
+  left: 30px;
+}

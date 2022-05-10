@@ -1,0 +1,16 @@
+/* use your own selectors, of course! .class is a placeholder */
+.class {
+  /* mobile styles */
+}
+
+@media only screen and (min-width: 768px) {
+  .class {
+    /* tablet styles */
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .class {
+    /* desktop styles */
+  }
+}
