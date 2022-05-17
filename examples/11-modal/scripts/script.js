@@ -7,7 +7,7 @@ function transformBurgerIcon() {
   burger.classList.toggle("is-active");
 }
 
-function showNavigation() {
+function toggleNavigation() {
   navigation.classList.toggle("is-open");
 }
 
@@ -15,5 +15,5 @@ function showNavigation() {
 // an anonymous function which is executed on click
 burger.addEventListener("click", () => {
   transformBurgerIcon();
-  showNavigation();
+  toggleNavigation();
 });
