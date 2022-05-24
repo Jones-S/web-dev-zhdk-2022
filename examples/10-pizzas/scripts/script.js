@@ -33,15 +33,17 @@ const ingredients = [
 ];
 
 function displayIngredients(ingredients) {
-  // loop over ingredients that are passed into function
+  const wrapper = document.querySelector('[data-js="ingredients-wrapper"]');
+
   for (let i = 0; i < ingredients.length; i++) {
     const item = document.createElement("li");
     // add class for styling
     item.classList.add("ingredient");
+
     // add data-attribute for selecting via js
     item.dataset.js = "ingredient";
+
     item.innerHTML = populateTemplate(ingredients[i]);
-    const wrapper = document.querySelector('[data-js="ingredients-wrapper"]');
     wrapper.appendChild(item);
   }
 }
@@ -59,16 +61,27 @@ function populateTemplate(ingredient) {
   return template;
 }
 
-function calculateTotalPrice(ingredients) {
-  let totalPrice = 0; // initally 0 CHF
+function calculatePrice() {
+  const selectedIngredients = getSelectedIngredients();
+  const price = calculateTotalPrice(selectedIngredients);
+  console.log("total price: ", price);
 
-  ingredients.forEach((ingredient) => {
+  displayPriceOnScreen(price);
+  displaySelectedIngredients(selectedIngredients);
+}
+
+function calculateTotalPrice(selectedIngredients) {
+  console.log("selectedIngredients: ", selectedIngredients);
+
+  let totalPrice = 0;
+
+  selectedIngredients.forEach((ingredient) => {
     const itemPrice = ingredient.querySelector('[data-js="price"]').innerHTML;
 
     console.log("itemPrice: ", itemPrice);
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-    var priceAsNumber = parseFloat(itemPrice, 10);
+    const priceAsNumber = parseFloat(itemPrice, 10);
     // each time we add the price to the total price
     totalPrice = totalPrice + priceAsNumber;
   });
@@ -96,6 +109,11 @@ function getSelectedIngredients() {
   return selectedItems;
 }
 
+displayIngredients(ingredients);
+
+const button = document.querySelector('[data-js="calculate-price-button"]');
+button.addEventListener("click", calculatePrice);
+
 function displayPriceOnScreen(price) {
   // turn number into price with two numbers after the comma
   const formattedPrice = price.toFixed(2);
@@ -109,7 +127,6 @@ function displayPriceOnScreen(price) {
 
 function displaySelectedIngredients(ingredients) {
   const container = document.querySelector('[data-js="final-ingredients"]');
-  console.log("container: ", container);
 
   // clearing list, to remove earlier added items
   container.innerHTML = "";
@@ -122,27 +139,10 @@ function displaySelectedIngredients(ingredients) {
 
     // create list item HTML
     const li = document.createElement("li");
-    li.innerHTML = `<li class="chosen-ingredient">${ingredientName}</li>`;
+    li.classList.add("chosen-ingredient");
+    li.innerHTML = ingredientName;
 
     // and add it at the end of the ul
     container.appendChild(li);
   });
 }
-
-function calculatePrice() {
-  const selectedIngredients = getSelectedIngredients();
-  const price = calculateTotalPrice(selectedIngredients);
-  console.log("total price: ", price);
-
-  displayPriceOnScreen(price);
-  displaySelectedIngredients(selectedIngredients);
-}
-
-const calculateButton = document.querySelector(
-  '[data-js="calculate-price-button"]'
-);
-
-// add click handler
-calculateButton.addEventListener("click", calculatePrice);
-
-displayIngredients(ingredients);
