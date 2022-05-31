@@ -1,14 +1,39 @@
 console.info("Everything looks fine ✅.");
 console.log("Open this script.js file and write your code...");
 
-// Display either
-// "The weather is sunny." when hovering the right box with the sun
-// or
-// "It is raining." when hovering the left box with the umbrella icon
+// selecting both boxes
+const boxes = document.querySelectorAll('[data-js="box"]');
+console.log("boxes: ", boxes);
 
-// hints:
-// select both boxes with JavaScript
-// Add an eventlistener to register hovers
-// Create a variable to save one of the two states
-// and write a display function that displays the text inside
-// the div '[data-js-weather]' depending on the variables value (condition)
+// adding an eventlistener for both boxes
+// that listens to mouseover events
+boxes.forEach((box) => {
+  box.addEventListener("mouseover", handleHover);
+});
+
+// function which is executed whenever a mouseover is detected
+// the parameter "event" includes information about that mouseover event
+// incl. information about the target (which is the element that is actually hovered).
+function handleHover(event) {
+  const target = event.target;
+  console.log("target: ", target);
+
+  // write rest of the display function here
+
+  // hints:
+  // Create a variable to save the value of the data-weather attribute:
+  // -> "sunny" || "rainy"
+
+  // const weather =
+
+  const displayElement = document.querySelector("[data-js-weather]");
+  console.log("displayElement; ", displayElement);
+
+  // Display either
+  // "The weather is sunny." or "It is raining."
+  // depending on the value of the variable "weather"
+  // and display that text inside
+  // the already selected div "displayElement"
+
+  // Make use of a conditional branching (if)
+}
