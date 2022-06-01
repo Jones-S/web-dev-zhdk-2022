@@ -9,8 +9,12 @@ console.log("Open this script.js file and write your code...");
 
 const time = 1000; // ms
 
+const element = document.querySelector('[data-js="box"]');
+
 function doSomethingLater() {
   console.log(`Log this text after ${time} milliseconds`);
+
+  element.innerHTML = "<p>whatever <strong>bold</strong></p>";
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
